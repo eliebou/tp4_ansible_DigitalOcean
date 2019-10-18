@@ -32,7 +32,7 @@
         host: '{{ inventory_hostname }}'
         socket: /var/lib/haproxy/stats
         backend: habackend
-      delegate_to: balancer
+      delegate_to: balancer0
       loop: "{{ groups.balancers }}"
 
 
