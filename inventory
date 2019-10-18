@@ -1,0 +1,12 @@
+[all:vars]
+ansible_user=root
+
+[balancers]
+balancer0 ansible_host=188.166.11.118 ansible_python_interpreter=/usr/bin/python
+
+[appservers]
+app0 ansible_host=188.166.19.186
+app1 ansible_host=188.166.18.144
+
+[awxservers]
+awx0 ansible_host=188.166.6.53

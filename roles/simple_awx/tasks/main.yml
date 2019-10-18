@@ -1,0 +1,44 @@
+- name: install apt dependencies
+  apt:
+    name:
+      - python3-pip
+      - git
+      - gcc
+    state: present
+
+- name: Install docker python module
+  pip:
+    name:
+      - docker
+      - docker-compose
+      - ansible
+    state: present 
+    executable: pip3
+
+
+- name: Clone AWX 
+  git:
+    repo: "{{ awx_repo }}"
+    dest: "{{ awx_repo_dir }}"
+    version: "{{ awx_version }}"
+    accept_hostkey: yes
+    update: no
+
+- name: Setup awx config file
+  template:
+    src: inventory.j2
+    dest: "{{ awx_repo_dir }}/installer/inventory"
+
+- name: AWX ansible installation
+  shell: "ansible-playbook -i inventory install.yml"
+  args:
+    chdir: "{{ awx_repo_dir }}/installer"
+    creates: /etc/awx_playbook_complete
+  when: awx_run_install_playbook
+
+- name: Create a file to mark whether this playbook has completed.
+  file:
+    path: /etc/awx_playbook_complete
+    state: touch
+  changed_when: False
+
