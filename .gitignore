@@ -7,7 +7,6 @@ test.sh
 
 roles/geerlingguy.*
 
-.vagrant
 awx
 *.retry
 ubuntu-bionic-18.04-cloudimg-console.log
@@ -19,11 +18,8 @@ ansible-digital_ocean.cache
 .idea
 **/.terraform
 .terraform.tfstate.lock.info
-.vagrant
 
 *.tfvars
 **/terraform.tfvars
 *.tfstate
 *.tfstate.backup
-
-*.retry
